@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { time } = require("motion");
+const motion = require("motion");
 
 const adminSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
