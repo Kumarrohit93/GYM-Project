@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "../services/api";
-import { CurrencyRupee, Plus, Filter, X, AlertCircle } from "lucide-react";
+import { IndianRupee, Plus, Filter, X, AlertCircle } from "lucide-react";
 
 const Payments = () => {
   const [payments, setPayments] = useState([]);

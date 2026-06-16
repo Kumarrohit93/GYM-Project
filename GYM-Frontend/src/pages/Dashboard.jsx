@@ -5,7 +5,7 @@ import {
   Users,
   UserCheck,
   Calendar,
-  CurrencyRupee,
+  IndianRupee,
   AlertTriangle,
   Plus,
   ArrowRight,

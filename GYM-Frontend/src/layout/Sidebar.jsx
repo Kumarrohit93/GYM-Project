@@ -4,7 +4,7 @@ import {
   LayoutDashboard,
   Users,
   CreditCard,
-  IndiaRupee,
+  IndianRupee,
   Calendar,
   Dumbbell,
   TrendingUp,
