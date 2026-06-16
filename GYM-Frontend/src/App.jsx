@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import AuthListener from "./components/AuthListener";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -18,7 +18,7 @@ import Notifications from "./pages/Notifications";
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <HashRouter>
         <AuthListener />
         <Routes>
           <Route path="/login" element={<Login />} />
