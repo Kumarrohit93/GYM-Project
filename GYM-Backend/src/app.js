@@ -13,6 +13,7 @@ const workoutRoute = require("./Routes/WorkoutRoute");
 const progressRoute = require("./Routes/ProgressRoute");
 const notificationRoute = require("./Routes/NotificationRoute");
 const dashboardRoute = require("./Routes/DashboardRoute");
+const healthRoute = require("./Routes/HealthRoute");
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use("/workout", workoutRoute);
 app.use("/progress", progressRoute);
 app.use("/notification", notificationRoute);
 app.use("/dashboard", dashboardRoute);
+app.use("/", healthRoute);
 
 // Base route
 app.get("/", (req, res) => {
