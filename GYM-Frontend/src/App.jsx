@@ -70,7 +70,7 @@ function App() {
 
           <Route path="*" element={<RootRedirect />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </AuthProvider>
   );
 }
