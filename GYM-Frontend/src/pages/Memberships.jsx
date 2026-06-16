@@ -130,7 +130,7 @@ const Memberships = () => {
               <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Pass</span>
               <h4 className="text-lg font-bold text-[#111827] mt-1">{plan.name}</h4>
               <div className="mt-4 flex items-baseline gap-1">
-                <span className="text-3xl font-extrabold text-[#111827]">${plan.price}</span>
+                <span className="text-3xl font-extrabold text-[#111827]">₹{plan.price}</span>
                 <span className="text-sm text-gray-500">/ {plan.durationMonths} {plan.durationMonths === 1 ? "month" : "months"}</span>
               </div>
             </div>
@@ -270,7 +270,7 @@ const Memberships = () => {
                 >
                   {plans.map((p) => (
                     <option key={p._id} value={p._id}>
-                      {p.name} - ${p.price} ({p.durationMonths} mo)
+                      {p.name} - ₹{p.price} ({p.durationMonths} mo)
                     </option>
                   ))}
                 </select>

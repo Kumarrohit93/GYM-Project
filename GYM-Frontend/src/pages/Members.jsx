@@ -712,7 +712,7 @@ const Members = () => {
                             {selectedMemberAnalytics.payment.history.map((pay) => (
                               <tr key={pay._id} className="hover:bg-gray-50/50">
                                 <td className="px-4 py-2.5 font-medium">{new Date(pay.dueDate).toLocaleDateString()}</td>
-                                <td className="px-4 py-2.5 font-bold">${pay.amount}</td>
+                                <td className="px-4 py-2.5 font-bold">₹{pay.amount}</td>
                                 <td className="px-4 py-2.5 text-gray-500">
                                   {pay.paymentDate ? new Date(pay.paymentDate).toLocaleDateString() : "--"}
                                 </td>

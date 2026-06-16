@@ -5,7 +5,7 @@ import {
   Users,
   UserCheck,
   Calendar,
-  DollarSign,
+  CurrencyRupee,
   AlertTriangle,
   Plus,
   ArrowRight,
@@ -20,6 +20,7 @@ import {
   TrendingUp,
   CreditCard,
   Check,
+  Camera,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import API from "../services/api";
@@ -167,39 +168,19 @@ const Dashboard = () => {
         return;
       }
 
-      if (!("geolocation" in navigator)) {
+      try {
+        await API.post("/attendance/checkin", {
+          qrToken: qrTokenInput.trim(),
+        });
+        setScanSuccess(true);
+        setScanMessage("Check-In Successful! Have a great workout session!");
+      } catch (err) {
         setScanSuccess(false);
-        setScanMessage("GPS is required to mark attendance. Please enable location services.");
+        setScanMessage(err.response?.data?.message || "Error checking in");
+      } finally {
+        fetchMemberDashboardData();
         setScanning(false);
-        return;
       }
-
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          try {
-            const { latitude, longitude } = position.coords;
-            await API.post("/attendance/checkin", {
-              qrToken: qrTokenInput.trim(),
-              latitude,
-              longitude,
-            });
-            setScanSuccess(true);
-            setScanMessage("Check-In Successful! Have a great workout session!");
-          } catch (err) {
-            setScanSuccess(false);
-            setScanMessage(err.response?.data?.message || "Error checking in");
-          } finally {
-            fetchMemberDashboardData();
-            setScanning(false);
-          }
-        },
-        () => {
-          setScanSuccess(false);
-          setScanMessage("You must be inside the gym to mark attendance. Please enable GPS and try again.");
-          setScanning(false);
-        },
-        { enableHighAccuracy: true, timeout: 10000 }
-      );
     } catch (err) {
       console.error(err);
       setScanSuccess(false);
@@ -220,8 +201,8 @@ const Dashboard = () => {
           { title: "Total Members", value: stats.totalMembers, icon: Users, color: "text-[#111827]", bg: "bg-blue-50/50" },
           { title: "Active Members", value: stats.activeMembers, icon: UserCheck, color: "text-[#22C55E]", bg: "bg-green-50/50" },
           { title: "Present Today", value: stats.presentToday, icon: Calendar, color: "text-purple-600", bg: "bg-purple-50/50" },
-          { title: "Monthly Revenue", value: `$${stats.monthlyRevenue}`, icon: DollarSign, color: "text-[#FF6B00]", bg: "bg-orange-50/50" },
-          { title: "Pending Fees", value: `$${stats.pendingFees}`, icon: AlertTriangle, color: "text-[#EF4444]", bg: "bg-red-50/50" },
+          { title: "Monthly Revenue", value: `₹${stats.monthlyRevenue}`, icon: CurrencyRupee, color: "text-[#FF6B00]", bg: "bg-orange-50/50" },
+          { title: "Pending Fees", value: `₹${stats.pendingFees}`, icon: AlertTriangle, color: "text-[#EF4444]", bg: "bg-red-50/50" },
         ]
       : [];
 
@@ -309,7 +290,7 @@ const Dashboard = () => {
                 className="flex w-full items-center justify-between rounded-lg border border-borders px-4 py-3 text-sm font-medium text-gray-700 hover:bg-[#FF6B00]/5 hover:text-[#FF6B00] transition-colors"
               >
                 <div className="flex items-center gap-3">
-                  <DollarSign size={16} />
+                  <CurrencyRupee size={16} />
                   <span>Record Payment</span>
                 </div>
                 <Plus size={16} />
@@ -545,7 +526,7 @@ const Dashboard = () => {
         <div className="flex items-center gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-[#EF4444] text-sm">
           <AlertTriangle className="text-[#EF4444] shrink-0" size={20} />
           <div>
-            You have pending gym fees of <span className="font-bold">${paymentStats.pendingDues}</span>. Please clear your balance as soon as possible.
+            You have pending gym fees of <span className="font-bold">₹{paymentStats.pendingDues}</span>. Please clear your balance as soon as possible.
           </div>
         </div>
       )}
@@ -592,12 +573,12 @@ const Dashboard = () => {
                   isFeePending ? "bg-red-50 text-red-500" : "bg-green-50 text-green-500"
                 }`}
               >
-                <DollarSign size={18} />
+                <CurrencyRupee size={18} />
               </div>
             </div>
             <div className="mt-3">
               <h3 className="text-lg font-bold text-[#111827]">
-                {isFeePending ? `$${paymentStats.pendingDues} Due` : "Fees Fully Paid"}
+                {isFeePending ? `₹${paymentStats.pendingDues} Due` : "Fees Fully Paid"}
               </h3>
               <p className="text-xs text-gray-500 mt-1 font-medium">
                 Status:{" "}

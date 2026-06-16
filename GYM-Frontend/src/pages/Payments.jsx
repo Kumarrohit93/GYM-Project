@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "../services/api";
-import { DollarSign, Plus, Filter, X, AlertCircle } from "lucide-react";
+import { CurrencyRupee, Plus, Filter, X, AlertCircle } from "lucide-react";
 
 const Payments = () => {
   const [payments, setPayments] = useState([]);
@@ -125,7 +125,7 @@ const Payments = () => {
       ) : filteredPayments.length === 0 ? (
         <div className="rounded-xl border border-borders bg-white py-16 text-center shadow-sm">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gray-50 text-gray-400 mb-4">
-            <DollarSign size={24} />
+            <CurrencyRupee size={24} />
           </div>
           <h3 className="text-sm font-semibold text-[#111827]">No Transactions Found</h3>
           <p className="text-xs text-gray-400 mt-1">Adjust filters or record a new transaction to start logs.</p>
@@ -148,7 +148,7 @@ const Payments = () => {
                 {filteredPayments.map((p) => (
                   <tr key={p._id} className="hover:bg-gray-50/50">
                     <td className="px-6 py-4 font-semibold">{p.memberId?.fullName || "Deleted Member"}</td>
-                    <td className="px-6 py-4 font-bold text-gray-700">${p.amount}</td>
+                    <td className="px-6 py-4 font-bold text-gray-700">₹{p.amount}</td>
                     <td className="px-6 py-4 text-xs font-mono text-gray-400">
                       {new Date(p.dueDate).toLocaleDateString()}
                     </td>
@@ -213,7 +213,7 @@ const Payments = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Amount ($)</label>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Amount (₹)</label>
                 <input
                   type="number"
                   value={formData.amount}

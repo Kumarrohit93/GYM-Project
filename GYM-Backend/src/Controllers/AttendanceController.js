@@ -60,26 +60,13 @@ const checkIn = async (req, res) => {
     }
 
     if (req.userType === "member") {
+      if (!qrToken) {
+        return res.status(400).json({ success: false, message: "QR token is required to mark attendance." });
+      }
+
       const qrValidation = await validateQRToken(qrToken);
       if (!qrValidation.valid) {
         return res.status(400).json({ success: false, message: qrValidation.message });
-      }
-
-      const gymConfig = await GymConfig.findOne();
-      if (!gymConfig || (gymConfig.latitude === 0 && gymConfig.longitude === 0)) {
-        return res.status(400).json({
-          success: false,
-          message: "Gym location is not configured. Please contact admin.",
-        });
-      }
-
-      if (latitude === undefined || longitude === undefined) {
-        return res.status(400).json({ success: false, message: "GPS coordinates are required to mark attendance." });
-      }
-
-      const distance = getDistance(Number(latitude), Number(longitude), gymConfig.latitude, gymConfig.longitude);
-      if (distance > gymConfig.radius) {
-        return res.status(400).json({ success: false, message: "You must be inside the gym to mark attendance." });
       }
     }
 

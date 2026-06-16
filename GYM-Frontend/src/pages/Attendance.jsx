@@ -105,39 +105,19 @@ const Attendance = () => {
         return;
       }
 
-      if (!("geolocation" in navigator)) {
+      try {
+        await API.post("/attendance/checkin", {
+          qrToken: qrTokenInput.trim(),
+        });
+        setScanSuccess(true);
+        setScanMessage("Check-In Successful! Active session started.");
+      } catch (err) {
         setScanSuccess(false);
-        setScanMessage("GPS is required to mark attendance. Please enable location services.");
+        setScanMessage(err.response?.data?.message || "Error checking in");
+      } finally {
+        fetchData();
         setScanning(false);
-        return;
       }
-
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          try {
-            const { latitude, longitude } = position.coords;
-            await API.post("/attendance/checkin", {
-              qrToken: qrTokenInput.trim(),
-              latitude,
-              longitude,
-            });
-            setScanSuccess(true);
-            setScanMessage("Check-In Successful! Active session started.");
-          } catch (err) {
-            setScanSuccess(false);
-            setScanMessage(err.response?.data?.message || "Error checking in");
-          } finally {
-            fetchData();
-            setScanning(false);
-          }
-        },
-        () => {
-          setScanSuccess(false);
-          setScanMessage("You must be inside the gym to mark attendance. Please enable GPS and try again.");
-          setScanning(false);
-        },
-        { enableHighAccuracy: true, timeout: 10000 }
-      );
     } catch (err) {
       console.error(err);
       setScanSuccess(false);
