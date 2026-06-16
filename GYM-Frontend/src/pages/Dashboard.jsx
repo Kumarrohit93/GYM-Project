@@ -201,7 +201,7 @@ const Dashboard = () => {
           { title: "Total Members", value: stats.totalMembers, icon: Users, color: "text-[#111827]", bg: "bg-blue-50/50" },
           { title: "Active Members", value: stats.activeMembers, icon: UserCheck, color: "text-[#22C55E]", bg: "bg-green-50/50" },
           { title: "Present Today", value: stats.presentToday, icon: Calendar, color: "text-purple-600", bg: "bg-purple-50/50" },
-          { title: "Monthly Revenue", value: `₹${stats.monthlyRevenue}`, icon: CurrencyRupee, color: "text-[#FF6B00]", bg: "bg-orange-50/50" },
+          { title: "Monthly Revenue", value: `₹${stats.monthlyRevenue}`, icon: IndianRupee, color: "text-[#FF6B00]", bg: "bg-orange-50/50" },
           { title: "Pending Fees", value: `₹${stats.pendingFees}`, icon: AlertTriangle, color: "text-[#EF4444]", bg: "bg-red-50/50" },
         ]
       : [];
@@ -290,7 +290,7 @@ const Dashboard = () => {
                 className="flex w-full items-center justify-between rounded-lg border border-borders px-4 py-3 text-sm font-medium text-gray-700 hover:bg-[#FF6B00]/5 hover:text-[#FF6B00] transition-colors"
               >
                 <div className="flex items-center gap-3">
-                  <CurrencyRupee size={16} />
+                  <IndianRupee size={16} />
                   <span>Record Payment</span>
                 </div>
                 <Plus size={16} />
@@ -573,7 +573,7 @@ const Dashboard = () => {
                   isFeePending ? "bg-red-50 text-red-500" : "bg-green-50 text-green-500"
                 }`}
               >
-                <CurrencyRupee size={18} />
+                <IndianRupee size={18} />
               </div>
             </div>
             <div className="mt-3">

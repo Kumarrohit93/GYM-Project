@@ -125,7 +125,7 @@ const Payments = () => {
       ) : filteredPayments.length === 0 ? (
         <div className="rounded-xl border border-borders bg-white py-16 text-center shadow-sm">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gray-50 text-gray-400 mb-4">
-            <CurrencyRupee size={24} />
+            <IndianRupee size={24} />
           </div>
           <h3 className="text-sm font-semibold text-[#111827]">No Transactions Found</h3>
           <p className="text-xs text-gray-400 mt-1">Adjust filters or record a new transaction to start logs.</p>
