@@ -17,7 +17,7 @@ const adminSidebarItems = [
   { name: "Dashboard", path: ADMIN_ROUTES.dashboard, icon: LayoutDashboard },
   { name: "Members", path: ADMIN_ROUTES.members, icon: Users },
   { name: "Memberships", path: ADMIN_ROUTES.memberships, icon: CreditCard },
-  { name: "Payments", path: ADMIN_ROUTES.payments, icon: IndiaRupee },
+  { name: "Payments", path: ADMIN_ROUTES.payments, icon: IndianRupee },
   { name: "Attendance", path: ADMIN_ROUTES.attendance, icon: Calendar },
   { name: "Workouts", path: ADMIN_ROUTES.workouts, icon: Dumbbell },
   { name: "Progress", path: ADMIN_ROUTES.progress, icon: TrendingUp },
